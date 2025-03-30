@@ -1,0 +1,64 @@
+:root {
+  --primary-gray-bg-color: hsl(240, 9.68%, 87.84%);
+  --primary-gray-text-color: hsl(220, 5.88%, 40%); /*#60646C also search icon*/
+  --primary-black-text-color: hsl(210, 15.69%, 20%);
+  --primary-purple-bg-color: hsl(240, 78.03%, 66.08%);
+  --primary-add-user-icon-color: hsl(240, 76.47%, 96.67%);
+  --primary-table-bg-header-color: hsl(240, 20%, 98.04%);
+  --primary-placeholder-text-color: hsl(230.77, 5.94%, 57.06%);
+  --primary-search-icon-color: hsl(220, 5.88%, 40%);
+}
+
+
+@font-face {
+  font-family: 'Untitled Sans Light';
+  font-style: normal;
+  font-weight: 100;
+  src: local(''),
+    url('./assets/fonts/test-untitled-sans-light.woff2') format('woff2')
+}
+
+@font-face {
+  font-family: 'Untitled Sans Regular';
+  font-style: normal;
+  font-weight: 100;
+  src: local(''),
+  url('./assets/fonts/test-untitled-sans-regular.woff2') format('woff2')
+}
+
+@font-face {
+  font-family: 'Untitled Sans Bold';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+  url('./assets/fonts/test-untitled-sans-bold.woff2') format('woff2')
+} 
+
+.untitled-sans-bold {
+  font-family: 'Untitled Sans';
+  font-weight: 700;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
