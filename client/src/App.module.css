@@ -9,9 +9,10 @@
   justify-content: center;
 }
 
-
 .components {
   width: min(53.125rem, 90%);
-  /* border: 1px solid var(--primary-purple-bg-color); */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
