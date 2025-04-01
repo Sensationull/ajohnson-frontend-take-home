@@ -72,3 +72,8 @@ table {
     background-color: #FFFFFF;
     border-color: var(--primary-gray-bg-color)
   }
+
+  .tableMemberInfo img {
+    max-width: 1.5rem;
+    border-radius: 50%;
+  }
