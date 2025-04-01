@@ -1,0 +1,74 @@
+table {
+    background-color: var(--primary-table-bg-header-color);
+    border: 1px solid var(--primary-gray-bg-color);
+    border-collapse: collapse; 
+    border-radius: .25rem;
+    text-align: left;
+    color: var(--primary-black-text-color);
+  }
+  
+  tr {
+    border: 1px solid var(--primary-gray-bg-color);
+    border-radius: .25rem;
+  }
+  
+  th {
+    width: clamp(14.75rem, 17.31rem, 18.81rem);
+  }
+  
+  th:first-child {
+    padding-left: .5rem;
+  }
+  
+  td, th {
+    height: 2.75rem;
+  }
+  
+  td:first-child {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: .5rem;
+    gap: .25rem;
+  }
+  
+  .tableHeaders {
+    background-color: var(--primary-table-bg-header-color);
+  }
+  
+  .tableMemberInfo, .tableFooter {
+    background-color: #FFFFFF
+  }
+  
+  .tableMemberInfo td:nth-last-child(1) {
+    /* background-color: orangered; */
+  }
+  
+  
+  .tableFooter td:nth-last-child(1){
+    text-align: right;
+    padding: 0.5rem;
+    /* border: 1px solid red; */
+  }
+  
+  .tableFooter button {
+    border-radius: .25rem;
+    border: 1px solid var(--primary-gray-bg-color);
+    padding: .25rem .5rem;
+  }
+  
+  .tableFooter .previousButton {
+    border: none;
+    margin-right: .5rem;
+  }
+  
+  .tableFooter .buttonIsDisabled {
+    color: var(--primary-gray-text-color);
+    border-color: var(--primary-gray-text-color);
+  }
+  
+  .tableFooter .buttonIsActive {
+    color: var(--primary-black-text-color);
+    background-color: #FFFFFF;
+    border-color: var(--primary-gray-bg-color)
+  }

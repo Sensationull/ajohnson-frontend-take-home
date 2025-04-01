@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar";
+import UserTable from "./UserTable";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <div className={styles.components}>
         <Header />
         <SearchBar />
+        <UserTable />
       </div>
     </main>
   );
