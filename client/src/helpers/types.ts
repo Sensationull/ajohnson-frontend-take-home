@@ -45,3 +45,11 @@ export type RoleTableProps = {
     pages: number;
   };
 };
+
+export type Tab = { id: string; name: string };
+
+export type HeaderProps = {
+  selectTab(tab: Tab): void;
+  tabs: Tab[];
+  activeTab: string;
+};

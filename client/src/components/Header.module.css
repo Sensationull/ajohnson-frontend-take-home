@@ -17,6 +17,10 @@
     align-items: center;
     color: var(--primary-gray-text-color);
   }
+
+  .listItem:hover {
+    cursor: pointer;
+  }
   
   .listItem.isSelected {
     color: var(--primary-black-text-color);
