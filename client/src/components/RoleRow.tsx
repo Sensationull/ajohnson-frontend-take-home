@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { Role } from "../helpers/types";
 import styles from "./UserTable.module.css";
 import DotsIcon from "./DotsIcon";
 import { formatDate } from "../helpers/utils";
 import Modal from "./Modal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateRole } from "../helpers/fetches";
 
 const RoleRow = ({ role }: { role: Role }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updatedName, setUpdatedName] = useState(role.name);
 
-  const { name, description, createdAt, id } = role;
+  const { name, description, createdAt, id, isDefault } = role;
 
   const toggleContextMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -20,9 +23,55 @@ const RoleRow = ({ role }: { role: Role }) => {
     setMenuOpen(false);
   };
 
+  const handleNameChange = (event: BaseSyntheticEvent) => {
+    setUpdatedName(event.target.value);
+  };
+
+  const queryClient = useQueryClient();
+
+  const mutateUpdateRole = useMutation({
+    mutationFn: ({
+      id,
+      updatedData,
+    }: {
+      id: string;
+      updatedData: { name: string; description: string; isDefault: boolean };
+    }) => updateRole(id, updatedData),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["roles"] });
+    },
+    onError: (error) => {
+      console.error({ error });
+    },
+    onSettled: () => {
+      console.log("updated role");
+    },
+  });
+
+  const { mutate: handleUpdate, isPending } = mutateUpdateRole;
+
+  const handleUpdateRole = (
+    roleId: string,
+    newRoleData: { name: string; description: string; isDefault: boolean }
+  ) => {
+    return handleUpdate({ id: roleId, updatedData: newRoleData });
+  };
+
+  const handleSubmit = (event: BaseSyntheticEvent, id: string) => {
+    event.preventDefault();
+    if (!updatedName) {
+      return;
+    }
+    handleUpdateRole(id, {
+      name: updatedName,
+      description: description || "foo",
+      isDefault,
+    });
+  };
+
   return (
     <tr className={styles.tableMemberInfo}>
-      <td>{name}</td>
+      <td>{isPending ? "Loading" : name}</td>
       <td>{formatDate(createdAt)}</td>
       <td>{description}</td>
       <td align="center">
@@ -31,16 +80,19 @@ const RoleRow = ({ role }: { role: Role }) => {
         </button>
         {isMenuOpen && (
           <div className={styles.contextMenu}>
-            <button>Edit User</button>
-            <button onClick={toggleModal}>Delete User</button>
+            <button onClick={toggleModal}>Edit Role Name</button>
+            <button>Delete Role</button>
           </div>
         )}
         {isModalOpen && (
           <Modal
-            headerText="Delete user"
+            headerText={`Edit role name: ${name}`}
             onReset={toggleModal}
             fullName={`${name}`}
-            userId={id}
+            roleId={id}
+            onNameChange={handleNameChange}
+            updatedRoleName={updatedName}
+            onSubmitRoleNameChange={handleSubmit}
           />
         )}
       </td>

@@ -1,5 +1,7 @@
+const BASE_URL = `http://localhost:3002`;
+
 export const fetchUsers = async (searchTerm: string = "") => {
-  const data = await fetch(`http://localhost:3002/users?search=${searchTerm}`);
+  const data = await fetch(`${BASE_URL}/users?search=${searchTerm}`);
 
   if (!data.ok) {
     throw new Error("Request errored");
@@ -10,7 +12,7 @@ export const fetchUsers = async (searchTerm: string = "") => {
 };
 
 export const deleteUser = async (userId: string) => {
-  const request = await fetch(`http://localhost:3002/users/${userId}`, {
+  const request = await fetch(`${BASE_URL}/users/${userId}`, {
     method: "DELETE",
   });
   if (!request.ok) {
@@ -20,11 +22,29 @@ export const deleteUser = async (userId: string) => {
   return response;
 };
 
-export const fetchRoles = async (roleId: string = "") => {
-  const data = await fetch(`http://localhost:3002/roles?search=${roleId}`);
+export const fetchRoles = async () => {
+  const data = await fetch(`${BASE_URL}/roles`);
 
   if (!data.ok) {
     throw new Error("Request errored");
+  }
+
+  const response = await data.json();
+  return response;
+};
+
+export const updateRole = async (
+  roleId: string,
+  updatedData: { name: string; description: string; isDefault: boolean }
+) => {
+  const data = await fetch(`${BASE_URL}/roles/${roleId}`, {
+    method: "PATCH",
+    body: JSON.stringify(updatedData),
+    headers: { "Content-Type": "application/json; charset=UTF-8" },
+  });
+  if (!data.ok) {
+    console.log({ data });
+    throw new Error("Could not update this role");
   }
 
   const response = await data.json();

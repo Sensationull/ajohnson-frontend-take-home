@@ -6,10 +6,8 @@ import RowTable from "./RowTable";
 const ManageRoles = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["roles"],
-    queryFn: () => fetchRoles(""),
+    queryFn: fetchRoles,
   });
-
-  console.log({ data });
 
   if (isLoading) {
     return (

@@ -1,38 +1,34 @@
-import { useEffect, useRef } from "react";
+import { BaseSyntheticEvent, useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUser } from "../helpers/fetches";
 
 type ModalProps = {
-  onReset(): void;
   headerText: string;
   fullName: string;
-  userId: string;
+  userId?: string;
+  roleId?: string;
+  updatedRoleName?: string;
+  onReset(): void;
+  onDeleteUser?(userId: string): void;
+  onNameChange?(event: BaseSyntheticEvent): void;
+  onSubmitRoleNameChange?(event: BaseSyntheticEvent, roleId: string): void;
 };
 
-const Modal = ({ headerText, onReset, fullName, userId }: ModalProps) => {
-  const queryClient = useQueryClient();
-
+const Modal = ({
+  headerText,
+  onReset,
+  fullName,
+  userId,
+  onDeleteUser,
+  roleId,
+  onSubmitRoleNameChange,
+  onNameChange,
+  updatedRoleName,
+}: ModalProps) => {
   useEffect(() => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
     }
   }, []);
-
-  const mutateDeleteUser = useMutation({
-    mutationFn: deleteUser,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["users"] }); // Wait for users to refresh
-    },
-    onError: (error) => {
-      console.error("Error deleting user:", error);
-    },
-    onSettled: () => {
-      onReset();
-    },
-  });
-
-  const { mutate: onDelete } = mutateDeleteUser;
 
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
@@ -45,9 +41,14 @@ const Modal = ({ headerText, onReset, fullName, userId }: ModalProps) => {
     }
   };
 
-  const handleDelete = () => {
+  const handleConfirmation = (event: BaseSyntheticEvent) => {
     closeDialog(false);
-    onDelete(userId);
+    if (onDeleteUser && userId) {
+      onDeleteUser(userId);
+    }
+    if (onSubmitRoleNameChange && roleId) {
+      onSubmitRoleNameChange(event, roleId);
+    }
   };
   return (
     <>
@@ -61,10 +62,26 @@ const Modal = ({ headerText, onReset, fullName, userId }: ModalProps) => {
             {headerText}
           </h2>
           <section>
-            <div>
-              Are you sure? The user <strong>{fullName}</strong> will
-              permanently be deleted
-            </div>
+            {userId && (
+              <div>
+                Are you sure? The user <strong>{fullName}</strong> will
+                permanently be deleted
+              </div>
+            )}
+            {/* Change composition of the component later */}
+            {roleId && (
+              <div>
+                <form onSubmit={handleConfirmation}>
+                  <label htmlFor="role">Change role name to: </label>
+                  <input
+                    name="role"
+                    aria-label="role name input"
+                    value={updatedRoleName}
+                    onChange={onNameChange}
+                  />
+                </form>
+              </div>
+            )}
           </section>
           <div className={styles.buttonGroup}>
             <button
@@ -73,7 +90,10 @@ const Modal = ({ headerText, onReset, fullName, userId }: ModalProps) => {
             >
               Cancel
             </button>
-            <button className={styles.deleteButton} onClick={handleDelete}>
+            <button
+              className={styles.deleteButton}
+              onClick={handleConfirmation}
+            >
               Delete user
             </button>
           </div>

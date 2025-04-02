@@ -2,17 +2,13 @@ import Header from "./components/Header";
 import styles from "./App.module.css";
 import SearchBar from "./components/SearchBar";
 import ManageUsers from "./components/ManageUsers";
-import { BaseSyntheticEvent, useEffect, useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { useDebouncedValue } from "./hooks/useDebouncedValue";
 import ManageRoles from "./components/ManageRoles";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedValue] = useDebouncedValue(searchQuery);
-
-  useEffect(() => {
-    console.log({ searchQuery, debouncedValue });
-  }, [searchQuery, debouncedValue]);
 
   const handleChange = (event: BaseSyntheticEvent) => {
     const target = event.target.value;

@@ -4,13 +4,35 @@ import { User } from "../helpers/types";
 import { formatDate, getRoleNameById } from "../helpers/utils";
 import { useState } from "react";
 import Modal from "./Modal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteUser } from "../helpers/fetches";
 
 const UserRow = ({ user }: { user: User }) => {
+  const queryClient = useQueryClient();
+
+  /* Context Menu state */
   const [isMenuOpen, setMenuOpen] = useState(false);
+  /* Modal state */
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { first, last, photo, roleId, createdAt, id } = user;
+  /* Delete User mutation */
+  const mutateDeleteUser = useMutation({
+    mutationFn: deleteUser,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["users"] }); // Wait for users to refresh
+    },
+    onError: (error) => {
+      console.error("Error deleting user:", error);
+    },
+    onSettled: () => {
+      toggleModal();
+    },
+  });
 
+  const { mutate: onDelete } = mutateDeleteUser;
+
+  /* Generic Handlers */
   const toggleContextMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
@@ -44,6 +66,7 @@ const UserRow = ({ user }: { user: User }) => {
             onReset={toggleModal}
             fullName={`${first} ${last}`}
             userId={id}
+            onDeleteUser={onDelete}
           />
         )}
       </td>

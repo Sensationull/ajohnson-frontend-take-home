@@ -4,11 +4,6 @@ import UserRow from "./UserRow";
 import clsx from "clsx";
 
 const UserTable = ({ userInfo }: UserTableProps) => {
-  /*
-    render the table
-    create the rows dependent upon data
-    BONUS: change the page when next is clicked
-  */
   const { data: users } = userInfo;
 
   return (
