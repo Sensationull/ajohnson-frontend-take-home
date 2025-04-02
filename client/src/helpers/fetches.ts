@@ -19,3 +19,14 @@ export const deleteUser = async (userId: string) => {
   const response = await request.json();
   return response;
 };
+
+export const fetchRoles = async (roleId: string = "") => {
+  const data = await fetch(`http://localhost:3002/roles?search=${roleId}`);
+
+  if (!data.ok) {
+    throw new Error("Request errored");
+  }
+
+  const response = await data.json();
+  return response;
+};

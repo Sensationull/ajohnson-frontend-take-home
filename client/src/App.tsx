@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar";
 import ManageUsers from "./components/ManageUsers";
 import { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useDebouncedValue } from "./hooks/useDebouncedValue";
+import ManageRoles from "./components/ManageRoles";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,6 +25,7 @@ function App() {
         <Header />
         <SearchBar searchQuery={searchQuery} onChange={handleChange} />
         <ManageUsers searchTerm={debouncedValue} />
+        <ManageRoles />
       </div>
     </main>
   );

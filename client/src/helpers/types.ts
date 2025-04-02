@@ -10,6 +10,15 @@ export type User = {
   photo?: string;
 };
 
+export type Role = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  description?: string;
+  isDefault: boolean;
+};
+
 export type SearchBarProps = {
   searchQuery: string;
   onChange(event: BaseSyntheticEvent): void;
@@ -22,6 +31,15 @@ export type ManageUsersProps = {
 export type UserTableProps = {
   userInfo: {
     data: User[];
+    next: number | null;
+    prev: number | null;
+    pages: number;
+  };
+};
+
+export type RoleTableProps = {
+  roleInfo: {
+    data: Role[];
     next: number | null;
     prev: number | null;
     pages: number;
