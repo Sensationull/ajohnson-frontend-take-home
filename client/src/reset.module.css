@@ -7,6 +7,9 @@
   --primary-table-bg-header-color: hsl(240, 20%, 98.04%);
   --primary-placeholder-text-color: hsl(230.77, 5.94%, 57.06%); /* #8B8D98 */
   --primary-search-icon-color: hsl(220, 5.88%, 40%);
+  --primary-red-border-color: #eeaab6; /* hsl(349, 67% 80%); This wasn't rendering as an hsl value??*/
+  --primary-red-text-color: hsl(345, 80%, 48%);
+  --primary-red-bg-color: hsl(0, 100%, 99%);
 }
 
 
@@ -61,4 +64,8 @@ ol, ul {
 img {
   max-width: 100%;
   height: auto;
+}
+
+button {
+  cursor: pointer;
 }

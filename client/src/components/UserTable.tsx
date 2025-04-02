@@ -10,7 +10,7 @@ const UserTable = ({ userInfo }: UserTableProps) => {
     BONUS: change the page when next is clicked
   */
   const { data: users } = userInfo;
-  // console.log({ users });
+
   return (
     <>
       <tbody>

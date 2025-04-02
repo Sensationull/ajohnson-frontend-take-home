@@ -1,0 +1,43 @@
+.dialog {
+    border-color: transparent;
+    border-radius: .75rem;
+}
+
+.dialog h2 {
+    text-align: start;
+    font-size: 20px;
+}
+
+.dialog section {
+    min-height: 1.625rem;
+    min-width: 30.5rem;
+    font-size: .875rem;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dialog .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonGroup button {
+    height: 2rem;
+    padding: .25rem .75rem;
+    border-radius: .25rem;
+    cursor:pointer;
+}
+
+.buttonGroup .cancelButton {
+    border: 1px solid var(--primary-gray-bg-color);
+    background-color: transparent;
+    margin-right: .25rem;
+}
+
+.buttonGroup .deleteButton {
+    border: 1px solid var(--primary-red-border-color);
+    background-color: var(--primary-red-bg-color);
+    color: var(--primary-red-text-color);
+}
