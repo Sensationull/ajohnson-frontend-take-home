@@ -31,62 +31,42 @@ Be sure to include a README that outlines what you'd improve or do differently i
      npm install
      npm run api
      ```
-3. **Project Setup**: Add your project under the `client` directory.
+3. **Start the FE Client**:
+  - In another terminal window run the following operations
+  ```bash
+  cd client
+  npm install
+  npm run dev
+  ```
+4. **Navigate to localhost:5173**
 
-## Design Reference
+## What would I do if I had more time? Or do differently?
 
-Be sure to consult the Figma design file that you were invited to view. You'll need to sign-in to Figma to access the design, so you may need to create a Figma account.
+TLDR; 
+1. Don't build everything from scratch. 
+2. The UX is good, I wanted it to be better than just good. I didn't give as much user feedback as I would if I were shipping this to prod. 
+3. An extension of 1, Libraries help with modularity and Single Purpose code. (and form validation, testing, accessibility, routing, etc)
+4. Contextual animations for new/updated data in the table
+5. It's not pixel perfect and that honestly ALWAYS will bug me. There was no dev mode nor assets given outside of the Figma, so having to eye-ball the fonts and the colors got me close, but not where I want to be. 
 
-The design is a starting point — you'll need to fill in some details (e.g., loading states, error states, hover states). The "Roles" tab is not designed, so you'll infer the design based on what is provided for the "Users" tab.
+This was an interesting take home. I enjoyed the process of building out this UI and the freedom it allowed. I learned a ton and will hopefully be able to grow from this experience.
 
-For those portions of the exercise in which the design is given, your implementation should match the design as closely as possible. Attention to detail is important. It is certainly acceptable to deviate from the design if you are confident it is an improvement, but please explain your thinking in your README.
+I made a decision early on to build the components from scratch (outside of Tanstack Query & Framer Motion). Because If I'm going to be asked to talk about my submission and decisions, I want to know what I'm talking about. I've found the more abstractions I add that I have small amounts of time using them can make for a lot of hand-waving/shrugging ¯\_(ツ)_/¯ when discussing with others. 
 
-## Backend API
+My process included scaffolding out the UI with HTML and CSS, then adding the data and interactivity, and finally cleanup/finishing touches. 
 
-The API provides full CRUD support for users and roles, but you won’t need to use every endpoint.
+Early into scaffolding the table I ran into an issue with getting the external borders for the table to still apply their border-radius after having issued `border-collapse: collapse` on a table element. That declaration collapses the borders for table cells and the reason for applying that declaration lay with the need to remove the column borders so I could style the table as closely to the designs as possible. I spent a longer time than I care to admit trying to figure out a solution and eventually decided that the juice was no longer worth the squeeze for this submission, but I'd like to understand why that happens and how Radix works around it. 
 
-**Do not alter the backend API**.
+And that's when it dawned on me that using Radix or potentially shadcn/bootstrap/etc could've saved me a ton of time with this issue. I know on some occassions styling with certain libraries can be difficult and since I was on a limited amount of time I didn't want to risk running into a variety of styling issues when I feel pretty confident in my CSS abilities and want to grow them further.
 
-The API includes intentional latency and random server errors to simulate real-world scenarios. Ensure your front-end handles these gracefully.
+There are also a few UX areas (deleting a user/editing a role name) that could be improved. Maybe after the action is taken a loading spinner or skeleton loader is displayed, (this would help on slower connections) also the error states are pretty generic.
 
-You can adjust the API speed using the `SERVER_SPEED` environment variable:
+I'm also not doing any form validation for the edit role modal, which again, a proper library may have baked in for me had I decided to use one. 
 
-- **slow**: Simulate slower network (`SERVER_SPEED=slow npm run api`)
-- **instant**: Remove latency (`SERVER_SPEED=instant npm run api`)
+To truly configure modularity for the Table or Modal components that I wrote, I'd need to make them accept a variety of options to better control what renders (alternatively use the children prop) and as they are now, they're pretty rigid to the shape in the design.
 
-You can run backend tests by executing `npm run test` in the `server` directory. The test code is located at `server/src/api.test.ts`.
+a11y is partially covered, the production solution would need to be tested for this as well with something like jest-axe
 
-## Tasks Overview
+A fun thing I didn't get to, but can't stop imagining, is a dynamic accordion-like exit/entry for when you update a row in the user table. If designed and implemented properly, it would help users keep track of what precisely was removed or added. 
 
-Work on the following tasks in this order. If you can’t complete all tasks, focus on quality rather than quantity.
-
-1. Setup the "Users" and "Roles" tab structure
-2. Add the users table
-3. Add support for filtering the users table via the "Search" input field
-4. Add support for deleting a user via the "more" icon button dropdown menu
-5. Add support for viewing all roles in the "Roles" tab
-6. Add support for renaming a role in the "Roles" tab
-7. [Bonus] Add pagination to the user table
-
-## Evaluation Criteria
-
-We’ll evaluate based on the following:
-
-- **User Experience (UX)**: Clean and intuitive interface.
-- **Component Composition**: Modular and reusable components.
-- **State Management & Caching**: Efficient handling of data.
-- **Error & Loading States**: Graceful handling of API delays and errors.
-- **CSS Animations**: Best practices followed for smooth UI interactions.
-- **Code Quality**: Clean, well-structured, and maintainable code.
-- **Accessibility**: Keyboard navigation and accessibility considerations.
-
-## Submission Guidelines
-
-**Please do not submit a pull request to the WorkOS repo.**
-
-In your forked repository, include a README that explains:
-
-- How to run your project.
-- What you would improve or do differently if you had more time.
-
-Once you're ready, share the URL to your GitHub repository with us. Make sure your code runs locally based on the instructions in your README.
+Also I like writing CSS because once you understand the basics you can do a lot with it. However, if I were working on a team, utility classes could be a boon (looking at you Tailwind) and we'd need to have some !important discussions around how do we write and maintain CSS. 
