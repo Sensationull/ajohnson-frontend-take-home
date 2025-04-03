@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useEffect, useRef } from "react";
+import { BaseSyntheticEvent, useEffect, useRef, useState } from "react";
 import styles from "./Modal.module.css";
 import clsx from "clsx";
 
@@ -24,6 +24,7 @@ const Modal = ({
   updatedRoleName,
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
     if (dialogRef.current) {
@@ -38,13 +39,13 @@ const Modal = ({
   };
 
   const handleConfirmation = (event: BaseSyntheticEvent) => {
-    closeDialog();
     if (onDeleteUser && userId) {
       onDeleteUser(userId);
     }
     if (onSubmitRoleNameChange && roleId) {
       onSubmitRoleNameChange(event, roleId);
     }
+    setConfirm(true);
   };
   return (
     <>
@@ -86,15 +87,28 @@ const Modal = ({
             >
               Cancel
             </button>
-            <button
-              className={clsx({
-                [styles.deleteButton]: userId,
-                [styles.confirmButton]: !userId,
-              })}
-              onClick={handleConfirmation}
-            >
-              {userId ? "Delete user" : "Confirm"}
-            </button>
+            {userId && (
+              <button
+                className={clsx({
+                  [styles.deleteButton]: userId,
+                  [styles.confirmButton]: !userId,
+                })}
+                onClick={handleConfirmation}
+              >
+                {!confirm ? "Delete user" : "Deleting..."}
+              </button>
+            )}
+            {roleId && (
+              <button
+                className={clsx({
+                  [styles.deleteButton]: userId,
+                  [styles.confirmButton]: !userId,
+                })}
+                onClick={handleConfirmation}
+              >
+                {!confirm ? "Confirm" : "Changing..."}
+              </button>
+            )}
           </div>
         </section>
       </dialog>
