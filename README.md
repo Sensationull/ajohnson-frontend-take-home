@@ -33,7 +33,7 @@ TLDR;
 
 This was an interesting take home. I enjoyed the process of building out this UI and the freedom it allowed. I learned a ton and will hopefully be able to grow from this experience.
 
-I made a decision early on to build the components from scratch (outside of Tanstack Query & Framer Motion). Because If I'm going to be asked to talk about my submission and decisions, I want to know what I'm talking about. I've found the more abstractions I add that I have small amounts of time using them can make for a lot of hand-waving/shrugging `¯\_(ツ)_/¯` when discussing with others. 
+I made a decision early on to build the components from scratch (outside of Tanstack Query & Framer Motion). Because If I'm going to be asked to talk about my submission and decisions, I want to know what I'm talking about. I've found that more abstractions I add, the less confident I am about code I write. 
 
 My process included scaffolding out the UI with HTML and CSS, then adding the data and interactivity, and finally cleanup/finishing touches. 
 
