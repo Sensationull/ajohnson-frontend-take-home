@@ -1,24 +1,6 @@
 # Frontend Take-Home Assignment
 
-Welcome to the WorkOS Frontend Take-Home Assignment!
-
-In this exercise, you'll implement the UI for a simple two-tab layout that lists users and roles. You will also add limited functionality to update users and roles.
-
-You should have recieved an invitation to view a Figma design file for the take-home assignment. If you haven't received and invitation email, please reach out to us.
-
-To get you started, we've also provided a fully functional backend API. Keep in mind, you won’t need to implement all of the functionality implied by the design or backend API. Make sure to focus on the specific tasks outlined below.
-
-Feel free to use any frontend framework and libraries you prefer — there’s no need to build everything from scratch. At WorkOS, we use [Radix Themes](https://www.radix-ui.com/), and it's perfectly fine if you want to leverage similar libraries. Just be ready to explain your decisions, including why you chose certain libraries and how they benefit the project.
-
-If you have any questions, feel free to reach out — we're happy to clarify anything.
-
-## Time Consideration
-
-We value your time! If this assignment takes you more than 8 hours, please submit whatever you have at that point.
-
-Focus on quality. You should be proud of your submission. While the code doesn't need to be 100% production-ready, it should be polished enough for a demo.
-
-Be sure to include a README that outlines what you'd improve or do differently if you had more time.
+Welcome to Andrew Johnson's WorkOS Frontend Take-Home Assignment!
 
 ## Getting Started
 
@@ -51,7 +33,7 @@ TLDR;
 
 This was an interesting take home. I enjoyed the process of building out this UI and the freedom it allowed. I learned a ton and will hopefully be able to grow from this experience.
 
-I made a decision early on to build the components from scratch (outside of Tanstack Query & Framer Motion). Because If I'm going to be asked to talk about my submission and decisions, I want to know what I'm talking about. I've found the more abstractions I add that I have small amounts of time using them can make for a lot of hand-waving/shrugging ¯\_(ツ)_/¯ when discussing with others. 
+I made a decision early on to build the components from scratch (outside of Tanstack Query & Framer Motion). Because If I'm going to be asked to talk about my submission and decisions, I want to know what I'm talking about. I've found the more abstractions I add that I have small amounts of time using them can make for a lot of hand-waving/shrugging `¯\_(ツ)_/¯` when discussing with others. 
 
 My process included scaffolding out the UI with HTML and CSS, then adding the data and interactivity, and finally cleanup/finishing touches. 
 
@@ -69,4 +51,4 @@ a11y is partially covered, the production solution would need to be tested for t
 
 A fun thing I didn't get to, but can't stop imagining, is a dynamic accordion-like exit/entry for when you update a row in the user table. If designed and implemented properly, it would help users keep track of what precisely was removed or added. 
 
-Also I like writing CSS because once you understand the basics you can do a lot with it. However, if I were working on a team, utility classes could be a boon (looking at you Tailwind) and we'd need to have some !important discussions around how do we write and maintain CSS. 
+Also I like writing CSS because once you understand the basics you can do a lot with it. However, if I were working on a team, utility classes could be a boon (looking at you Tailwind) and we'd need to have some `!important` discussions around how do we write and maintain CSS. 
