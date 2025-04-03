@@ -1,8 +1,8 @@
-import SearchIcon from "./SearchIcon";
-import PlusIcon from "./PlusIcon";
+import SearchIcon from "../Icons/SearchIcon";
+import PlusIcon from "../Icons/PlusIcon";
 
 import styles from "./SearchBar.module.css";
-import { SearchBarProps } from "../helpers/types";
+import { SearchBarProps } from "../../helpers/types";
 
 const SearchBar = ({ searchQuery, onChange }: SearchBarProps) => {
   return (

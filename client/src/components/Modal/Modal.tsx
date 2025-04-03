@@ -1,5 +1,6 @@
 import { BaseSyntheticEvent, useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
+import clsx from "clsx";
 
 type ModalProps = {
   headerText: string;
@@ -7,7 +8,6 @@ type ModalProps = {
   userId?: string;
   roleId?: string;
   updatedRoleName?: string;
-  onReset(): void;
   onDeleteUser?(userId: string): void;
   onNameChange?(event: BaseSyntheticEvent): void;
   onSubmitRoleNameChange?(event: BaseSyntheticEvent, roleId: string): void;
@@ -15,7 +15,6 @@ type ModalProps = {
 
 const Modal = ({
   headerText,
-  onReset,
   fullName,
   userId,
   onDeleteUser,
@@ -24,25 +23,22 @@ const Modal = ({
   onNameChange,
   updatedRoleName,
 }: ModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+
   useEffect(() => {
     if (dialogRef.current) {
       dialogRef.current.showModal();
     }
   }, []);
 
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
-
-  const closeDialog = (shouldReset: boolean) => {
-    if (dialogRef.current && !shouldReset) {
-      dialogRef.current.close();
-    } else if (dialogRef.current && shouldReset) {
-      onReset();
+  const closeDialog = () => {
+    if (dialogRef.current) {
       dialogRef.current.close();
     }
   };
 
   const handleConfirmation = (event: BaseSyntheticEvent) => {
-    closeDialog(false);
+    closeDialog();
     if (onDeleteUser && userId) {
       onDeleteUser(userId);
     }
@@ -86,15 +82,18 @@ const Modal = ({
           <div className={styles.buttonGroup}>
             <button
               className={styles.cancelButton}
-              onClick={() => closeDialog(true)}
+              onClick={() => closeDialog()}
             >
               Cancel
             </button>
             <button
-              className={styles.deleteButton}
+              className={clsx({
+                [styles.deleteButton]: userId,
+                [styles.confirmButton]: !userId,
+              })}
               onClick={handleConfirmation}
             >
-              Delete user
+              {userId ? "Delete user" : "Confirm"}
             </button>
           </div>
         </section>

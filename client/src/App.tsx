@@ -1,12 +1,12 @@
-import Header from "./components/Header";
-import styles from "./App.module.css";
-import SearchBar from "./components/SearchBar";
-import ManageUsers from "./components/ManageUsers";
 import { BaseSyntheticEvent, useState } from "react";
+import Tabs from "./components/Tab/Tabs";
+import styles from "./App.module.css";
+import SearchBar from "./components/SearchBar/SearchBar";
+import ManageUsers from "./components/Users/ManageUsers";
 import { useDebouncedValue } from "./hooks/useDebouncedValue";
-import ManageRoles from "./components/ManageRoles";
+import ManageRoles from "./components/Roles/ManageRoles";
 import { Tab } from "./helpers/types";
-import EntryAnimationWrapper from "./components/EntryAnimationWrapper";
+import EntryAnimationWrapper from "./components/Wrappers/EntryAnimationWrapper";
 
 const tabs = [
   { id: "users", name: "Users" },
@@ -32,7 +32,7 @@ function App() {
   return (
     <main className={styles.mainContainer}>
       <div className={styles.components}>
-        <Header selectTab={selectTab} activeTab={activeTab} tabs={tabs} />
+        <Tabs selectTab={selectTab} activeTab={activeTab} tabs={tabs} />
         <SearchBar searchQuery={searchQuery} onChange={handleChange} />
         <EntryAnimationWrapper>
           {usersActive && <ManageUsers searchTerm={debouncedValue} />}

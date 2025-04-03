@@ -1,11 +1,11 @@
 import { BaseSyntheticEvent, useState } from "react";
-import { Role } from "../helpers/types";
-import styles from "./UserTable.module.css";
-import DotsIcon from "./DotsIcon";
-import { formatDate } from "../helpers/utils";
-import Modal from "./Modal";
+import { Role } from "../../helpers/types";
+import styles from "../Table/Table.module.css";
+import DotsIcon from "../Icons/DotsIcon";
+import { formatDate } from "../../helpers/utils";
+import Modal from "../Modal/Modal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateRole } from "../helpers/fetches";
+import { updateRole } from "../../helpers/APIRequests";
 
 const RoleRow = ({ role }: { role: Role }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -44,7 +44,7 @@ const RoleRow = ({ role }: { role: Role }) => {
       console.error({ error });
     },
     onSettled: () => {
-      console.log("updated role");
+      toggleModal();
     },
   });
 
@@ -81,13 +81,12 @@ const RoleRow = ({ role }: { role: Role }) => {
         {isMenuOpen && (
           <div className={styles.contextMenu}>
             <button onClick={toggleModal}>Edit Role Name</button>
-            <button>Delete Role</button>
+            <button className={styles.buttonIsDisabled}>Delete Role</button>
           </div>
         )}
         {isModalOpen && (
           <Modal
             headerText={`Edit role name: ${name}`}
-            onReset={toggleModal}
             fullName={`${name}`}
             roleId={id}
             onNameChange={handleNameChange}

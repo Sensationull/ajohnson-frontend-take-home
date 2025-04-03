@@ -48,7 +48,7 @@ export type RoleTableProps = {
 
 export type Tab = { id: string; name: string };
 
-export type HeaderProps = {
+export type TabsProps = {
   selectTab(tab: Tab): void;
   tabs: Tab[];
   activeTab: string;

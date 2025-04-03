@@ -1,8 +1,8 @@
-import { RoleTableProps } from "../helpers/types";
+import { RoleTableProps } from "../../helpers/types";
 
 import RoleRow from "./RoleRow";
 
-const RowTable = ({ roleInfo }: RoleTableProps) => {
+const RowTableBody = ({ roleInfo }: RoleTableProps) => {
   const { data: roles } = roleInfo;
 
   return (
@@ -16,4 +16,4 @@ const RowTable = ({ roleInfo }: RoleTableProps) => {
   );
 };
 
-export default RowTable;
+export default RowTableBody;

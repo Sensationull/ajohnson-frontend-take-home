@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchRoles } from "../helpers/fetches";
-import styles from "./UserTable.module.css";
-import RowTable from "./RowTable";
-import EntryAnimationWrapper from "./EntryAnimationWrapper";
+import UserTable from "./UserTable";
+import { fetchUsers } from "../../helpers/APIRequests";
+import styles from "../Table/Table.module.css";
+import { ManageUsersProps } from "../../helpers/types";
+import EntryAnimationWrapper from "../Wrappers/EntryAnimationWrapper";
 
-const ManageRoles = () => {
+const ManageUsers = ({ searchTerm }: ManageUsersProps) => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["roles"],
-    queryFn: fetchRoles,
+    queryKey: ["users", searchTerm],
+    queryFn: () => fetchUsers(searchTerm),
   });
 
   if (isLoading) {
@@ -23,7 +24,7 @@ const ManageRoles = () => {
   }
 
   if (data.data.length === 0) {
-    return <>There were no roles found</>;
+    return <>There were no users found</>;
   }
 
   return (
@@ -31,17 +32,17 @@ const ManageRoles = () => {
       <table>
         <thead>
           <tr className={styles.tableHeaders}>
+            <th scope="col">User</th>
             <th scope="col">Role</th>
-            <th scope="col">Date Created</th>
             <th scope="col" colSpan={2}>
-              Description
+              Date Joined
             </th>
           </tr>
         </thead>
-        <RowTable roleInfo={data} />
+        <UserTable userInfo={data} />
       </table>
     </EntryAnimationWrapper>
   );
 };
 
-export default ManageRoles;
+export default ManageUsers;

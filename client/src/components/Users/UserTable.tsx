@@ -1,5 +1,5 @@
-import styles from "./UserTable.module.css";
-import { UserTableProps } from "../helpers/types";
+import styles from "../Table/Table.module.css";
+import { UserTableProps } from "../../helpers/types";
 import UserRow from "./UserRow";
 import clsx from "clsx";
 

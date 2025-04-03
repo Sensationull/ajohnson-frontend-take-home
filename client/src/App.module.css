@@ -1,5 +1,4 @@
 .mainContainer {
-  border: 1px solid red;
   height: 100vh; /* cascade fallback for non-chrome browsers*/
   height: 100svh;
   font-family: 'Untitled Sans Regular';

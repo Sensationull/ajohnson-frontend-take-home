@@ -1,11 +1,11 @@
-import styles from "./UserTable.module.css";
-import DotsIcon from "./DotsIcon";
-import { User } from "../helpers/types";
-import { formatDate, getRoleNameById } from "../helpers/utils";
+import styles from "../Table/Table.module.css";
+import DotsIcon from "../Icons/DotsIcon";
+import { User } from "../../helpers/types";
+import { formatDate, getRoleNameById } from "../../helpers/utils";
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from "../Modal/Modal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUser } from "../helpers/fetches";
+import { deleteUser } from "../../helpers/APIRequests";
 
 const UserRow = ({ user }: { user: User }) => {
   const queryClient = useQueryClient();
@@ -56,14 +56,13 @@ const UserRow = ({ user }: { user: User }) => {
         </button>
         {isMenuOpen && (
           <div className={styles.contextMenu}>
-            <button>Edit User</button>
+            <button className={styles.buttonIsDisabled}>Edit User</button>
             <button onClick={toggleModal}>Delete User</button>
           </div>
         )}
         {isModalOpen && (
           <Modal
             headerText="Delete user"
-            onReset={toggleModal}
             fullName={`${first} ${last}`}
             userId={id}
             onDeleteUser={onDelete}
