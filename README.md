@@ -52,3 +52,5 @@ a11y is partially covered, the production solution would need to be tested for t
 A fun thing I didn't get to, but can't stop imagining, is a dynamic accordion-like exit/entry for when you update a row in the user table. If designed and implemented properly, it would help users keep track of what precisely was removed or added. 
 
 Also I like writing CSS because once you understand the basics you can do a lot with it. However, if I were working on a team, utility classes could be a boon (looking at you Tailwind) and we'd need to have some `!important` discussions around how do we write and maintain CSS. 
+
+If you made it this far, thanks for reading. 
