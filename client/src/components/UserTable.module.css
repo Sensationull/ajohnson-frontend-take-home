@@ -5,6 +5,7 @@ table {
     border-radius: .25rem;
     text-align: left;
     color: var(--primary-black-text-color);
+    width: 100%;
   }
   
   tr {
