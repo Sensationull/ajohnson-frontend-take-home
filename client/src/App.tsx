@@ -33,9 +33,13 @@ function App() {
     <main className={styles.mainContainer}>
       <div className={styles.components}>
         <Tabs selectTab={selectTab} activeTab={activeTab} tabs={tabs} />
-        <SearchBar searchQuery={searchQuery} onChange={handleChange} />
         <EntryAnimationWrapper>
-          {usersActive && <ManageUsers searchTerm={debouncedValue} />}
+          {usersActive && (
+            <>
+              <SearchBar searchQuery={searchQuery} onChange={handleChange} />
+              <ManageUsers searchTerm={debouncedValue} />
+            </>
+          )}
           {rolesActive && <ManageRoles />}
         </EntryAnimationWrapper>
       </div>
